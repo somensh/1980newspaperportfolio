@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1980 Newspaper Portfolio - Personal Edition</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👑</text></svg>">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Courier+Prime:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'playfair': ['Playfair Display', 'serif'],
+                        'courier': ['Courier Prime', 'monospace'],
+                        'crimson': ['Crimson Text', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="font-crimson text-gray-800 dark:text-gray-200 min-h-screen relative">
+
+    <!-- Trail Canvas -->
+    <canvas id="trail-canvas" class="fixed top-0 left-0 pointer-events-none z-10"></canvas>
+
+    <!-- Header (Masthead) -->
+    <header class="newspaper-section bg-white dark:bg-gray-800 border-b-4 border-gray-800 dark:border-gray-200">
+        <div class="container mx-auto px-4 py-6">
+            <!-- Date and Volume -->
+            <div class="flex justify-between items-center text-sm font-courier mb-4">
+                <span id="current-date">Loading...</span>
+                <button id="theme-toggle"
+                    class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600">
+                    <i class="ri-sun-line dark:hidden"></i>
+                    <i class="ri-moon-line hidden dark:block"></i>
+                </button>
+                <span>SomEn</span>
+            </div>
+
+            <!-- Main Title -->
+            <div class="text-center">
+                <h1
+                    class="font-playfair font-black text-4xl md:text-6xl lg:text-7xl mb-2 tracking-wide cursor-pointer hover:text-red-600 transition-colors">
+                    👑 1980 Newspaper Portfolio
+                </h1>
+                <p class="font-courier text-lg md:text-xl mb-6 border-y-2 border-gray-800 dark:border-gray-200 py-2">
+                    ALL THE NEWS THAT'S FIT TO CODE
+                </p>
+
+                <!-- Navigation -->
+                <nav class="flex flex-wrap justify-center gap-4 md:gap-6 text-base md:text-lg font-courier font-bold">
+                    <a href="#about" class="newspaper-link">THE ABOUT TIMES</a>
+                    <a href="#projects" class="newspaper-link">PROJECT BULLETIN</a>
+                    <a href="#contact" class="newspaper-link">CONTACT CLASSIFIEDS</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="newspaper-section">
+        <div class="container mx-auto px-4">
+            <div class="grid lg:grid-cols-3 md:grid-cols-1 gap-6 lg:gap-8 items-start">
+                <div class="lg:col-span-2 slide-in-left">
+                    <h2 class="font-playfair font-black text-3xl md:text-4xl mb-4 typewriter-text">
+                        BREAKING: Local Developer Creates Stunning Digital Experiences
+                    </h2>
+                    <div class="newspaper-column text-justify leading-relaxed">
+                        <p class="drop-cap mb-4">
+                            In a remarkable display of technical prowess and creative vision, Somen Sharma, a final-year
+                            B.Tech student from Ranchi University, has been making waves in the digital development
+                            landscape. With over 1.5 years of hands-on experience in freelance projects and personal
+                            development initiatives, this young developer has demonstrated an exceptional ability to
+                            transform complex ideas into elegant, functional solutions.
+                        </p>
+                        <p class="mb-4">
+                            Sources close to the developer report that Sharma's approach to software development
+                            combines cutting-edge technology with user-centered design principles, resulting in
+                            applications that are not only technically sound but also intuitively accessible to end
+                            users.
+                        </p>
+                        <p>
+                            "Innovation isn't just about using the latest technology," Sharma was quoted as saying,
+                            "it's about solving real problems in ways that make people's lives better."
+                        </p>
+                    </div>
+                </div>
+                <div class="newspaper-image scale-in">
+                    <div
+                        class="bg-gray-300 dark:bg-gray-600 h-64 flex items-center justify-center mb-2 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=400&fit=crop&crop=face&auto=format&q=80"
+                            alt="Professional Developer" class="w-full h-full object-cover filter grayscale">
+                    </div>
+                    <p class="text-sm font-courier text-center italic">
+                        Lead Developer at work in the digital newsroom
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="newspaper-section">
+        <div class="container mx-auto px-4">
+            <h2
+                class="font-playfair font-black text-3xl md:text-4xl mb-6 text-center border-b-2 border-gray-800 dark:border-gray-200 pb-2">
+                THE ABOUT TIMES
+            </h2>
+
+            <div class="grid lg:grid-cols-3 md:grid-cols-1 gap-6 lg:gap-8">
+                <div class="lg:col-span-2 fade-in">
+                    <div class="newspaper-info-box mb-6 scale-in">
+                        <h3 class="font-playfair font-bold text-xl mb-3">Developer Profile</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <strong>Full Name:</strong> Somen Sharma<br>
+                                <strong>Education:</strong> B.Tech Computer Science (Final Year)<br>
+                                <strong>Institution:</strong> Ranchi University
+                            </div>
+                            <div>
+                                <strong>Location:</strong> Ranchi, Jharkhand<br>
+                                <strong>Experience:</strong> 1.5+ Years<br>
+                                <strong>Focus:</strong> Freelance & Personal Projects
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quote-box">
+                        <p class="font-crimson text-lg">
+                            "Code is poetry written in logic. Every line should serve a purpose, every function should
+                            tell a story, and every application should solve a problem worth solving."
+                        </p>
+                        <footer class="text-right mt-2 font-courier text-sm">— Somen Sharma</footer>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 gap-4 md:gap-6 mt-6">
+                        <div>
+                            <h4 class="font-playfair font-bold text-xl mb-3 border-b border-gray-400">Technical
+                                Expertise</h4>
+                            <ul class="font-courier text-sm space-y-1">
+                                <li>• Full-Stack Web Development</li>
+                                <li>• JavaScript & TypeScript</li>
+                                <li>• React.js & Vue.js</li>
+                                <li>• Python & Django</li>
+                                <li>• Node.js & Express</li>
+                                <li>• AI/ML Integration</li>
+                                <li>• Blockchain Development</li>
+                                <li>• Database Design</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-playfair font-bold text-xl mb-3 border-b border-gray-400">Achievements</h4>
+                            <ul class="font-courier text-sm space-y-1">
+                                <li>• 15+ Successful Projects</li>
+                                <li>• Client Satisfaction: 98%</li>
+                                <li>• Open Source Contributor</li>
+                                <li>• Technical Blogger</li>
+                                <li>• Mentoring Junior Developers</li>
+                                <li>• Rapid Prototyping Expert</li>
+                                <li>• Clean Code Advocate</li>
+                                <li>• Continuous Learner</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="newspaper-image slide-in-right">
+                    <div
+                        class="bg-gray-300 dark:bg-gray-600 h-48 flex items-center justify-center mb-4 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=300&fit=crop&auto=format&q=80"
+                            alt="Developer Workspace" class="w-full h-full object-cover filter grayscale">
+                    </div>
+                    <p class="text-sm font-courier text-center italic mb-4">
+                        Developer's workspace setup for maximum productivity
+                    </p>
+
+                    <div class="newspaper-info-box text-center">
+                        <h4 class="font-playfair font-bold mb-2">Quick Stats</h4>
+                        <div class="text-sm font-courier space-y-1">
+                            <div>☕ Coffee consumed: 500+ cups</div>
+                            <div>🌙 Late nights coding: 200+</div>
+                            <div>🐛 Bugs fixed: 1000+</div>
+                            <div>💡 Features implemented: 250+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="newspaper-section">
+        <div class="container mx-auto px-4">
+            <h2
+                class="font-playfair font-black text-3xl md:text-4xl mb-6 text-center border-b-2 border-gray-800 dark:border-gray-200 pb-2">
+                PROJECT BULLETIN
+            </h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                <!-- Project 1 -->
+                <article class="project-article fade-in">
+                    <h3 class="font-playfair font-bold text-xl mb-3">Personal Portfolio Website</h3>
+                    <div class="newspaper-image mb-3">
+                        <div class="bg-gray-300 dark:bg-gray-600 h-32 flex items-center justify-center overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=400&h=250&fit=crop&auto=format&q=80"
+                                alt="Portfolio Website" class="w-full h-full object-cover filter grayscale">
+                        </div>
+                    </div>
+                    <p class="text-sm mb-4 font-courier">A responsive portfolio website built with modern HTML5, CSS3,
+                        and JavaScript featuring elegant animations and mobile-first design.</p>
+                    <div class="text-xs font-courier mb-3 text-gray-600 dark:text-gray-400">
+                        Tech Stack: HTML, CSS, JavaScript
+                    </div>
+                    <div class="flex gap-2">
+                        <a href="https://github.com/somensh" class="project-link" title="GitHub">
+                            <i class="ri-github-line"></i>
+                        </a>
+                        <a href="#" class="project-link" title="Live Demo">
+                            <i class="ri-external-link-line"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Project 2 -->
+                <article class="project-article fade-in">
+                    <h3 class="font-playfair font-bold text-xl mb-3">CMS Dashboard</h3>
+                    <div class="newspaper-image mb-3">
+                        <div class="bg-gray-300 dark:bg-gray-600 h-32 flex items-center justify-center overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop&auto=format&q=80"
+                                alt="CMS Dashboard" class="w-full h-full object-cover filter grayscale">
+                        </div>
+                    </div>
+                    <p class="text-sm mb-4 font-courier">A comprehensive content management system with Vue.js frontend
+                        and Python backend, featuring real-time updates and user management.</p>
+                    <div class="text-xs font-courier mb-3 text-gray-600 dark:text-gray-400">
+                        Tech Stack: Vue.js, Python, Django
+                    </div>
+                    <div class="flex gap-2">
+                        <a href="https://github.com/somensh" class="project-link" title="GitHub">
+                            <i class="ri-github-line"></i>
+                        </a>
+                        <a href="#" class="project-link" title="Live Demo">
+                            <i class="ri-external-link-line"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Project 3 -->
+                <article class="project-article fade-in">
+                    <h3 class="font-playfair font-bold text-xl mb-3">AI Automation Suite</h3>
+                    <div class="newspaper-image mb-3">
+                        <div class="bg-gray-300 dark:bg-gray-600 h-32 flex items-center justify-center overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1555255707-c07966088b7b?w=400&h=250&fit=crop&auto=format&q=80"
+                                alt="AI Automation" class="w-full h-full object-cover filter grayscale">
+                        </div>
+                    </div>
+                    <p class="text-sm mb-4 font-courier">Machine learning powered automation tools using TensorFlow for
+                        data processing, pattern recognition, and predictive analytics.</p>
+                    <div class="text-xs font-courier mb-3 text-gray-600 dark:text-gray-400">
+                        Tech Stack: Python, TensorFlow, Pandas
+                    </div>
+                    <div class="flex gap-2">
+                        <a href="https://github.com/somensh" class="project-link" title="GitHub">
+                            <i class="ri-github-line"></i>
+                        </a>
+                        <a href="#" class="project-link" title="Live Demo">
+                            <i class="ri-external-link-line"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Project 4 -->
+                <article class="project-article fade-in">
+                    <h3 class="font-playfair font-bold text-xl mb-3">Blockchain Finance Platform</h3>
+                    <div class="newspaper-image mb-3">
+                        <div class="bg-gray-300 dark:bg-gray-600 h-32 flex items-center justify-center overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400&h=250&fit=crop&auto=format&q=80"
+                                alt="Blockchain Finance" class="w-full h-full object-cover filter grayscale">
+                        </div>
+                    </div>
+                    <p class="text-sm mb-4 font-courier">Decentralized finance application built on Web3 technologies
+                        with Solidity smart contracts for secure transactions.</p>
+                    <div class="text-xs font-courier mb-3 text-gray-600 dark:text-gray-400">
+                        Tech Stack: Web3, Solidity, React
+                    </div>
+                    <div class="flex gap-2">
+                        <a href="https://github.com/somensh" class="project-link" title="GitHub">
+                            <i class="ri-github-line"></i>
+                        </a>
+                        <a href="#" class="project-link" title="Live Demo">
+                            <i class="ri-external-link-line"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Project 5 -->
+                <article class="project-article fade-in">
+                    <h3 class="font-playfair font-bold text-xl mb-3">E-Commerce App</h3>
+                    <div class="newspaper-image mb-3">
+                        <div class="bg-gray-300 dark:bg-gray-600 h-32 flex items-center justify-center overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=250&fit=crop&auto=format&q=80"
+                                alt="E-Commerce Platform" class="w-full h-full object-cover filter grayscale">
+                        </div>
+                    </div>
+                    <p class="text-sm mb-4 font-courier">Full-featured e-commerce platform with React frontend and
+                        Node.js backend, including payment integration and inventory management.</p>
+                    <div class="text-xs font-courier mb-3 text-gray-600 dark:text-gray-400">
+                        Tech Stack: React, Node.js, MongoDB
+                    </div>
+                    <div class="flex gap-2">
+                        <a href="https://github.com/somensh" class="project-link" title="GitHub">
+                            <i class="ri-github-line"></i>
+                        </a>
+                        <a href="#" class="project-link" title="Live Demo">
+                            <i class="ri-external-link-line"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Project 6 -->
+                <article class="project-article fade-in">
+                    <h3 class="font-playfair font-bold text-xl mb-3">Task Management System</h3>
+                    <div class="newspaper-image mb-3">
+                        <div class="bg-gray-300 dark:bg-gray-600 h-32 flex items-center justify-center overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=250&fit=crop&auto=format&q=80"
+                                alt="Task Management" class="w-full h-full object-cover filter grayscale">
+                        </div>
+                    </div>
+                    <p class="text-sm mb-4 font-courier">Collaborative project management tool with real-time updates,
+                        team collaboration features, and progress tracking capabilities.</p>
+                    <div class="text-xs font-courier mb-3 text-gray-600 dark:text-gray-400">
+                        Tech Stack: Angular, Express.js, PostgreSQL
+                    </div>
+                    <div class="flex gap-2">
+                        <a href="https://github.com/somensh" class="project-link" title="GitHub">
+                            <i class="ri-github-line"></i>
+                        </a>
+                        <a href="#" class="project-link" title="Live Demo">
+                            <i class="ri-external-link-line"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="newspaper-section">
+        <div class="container mx-auto px-4">
+            <h2
+                class="font-playfair font-black text-3xl md:text-4xl mb-6 text-center border-b-2 border-gray-800 dark:border-gray-200 pb-2">
+                CONTACT CLASSIFIEDS
+            </h2>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <!-- Contact Info -->
+                    <div class="classified-ad rotate-in">
+                        <h3 class="font-playfair font-bold text-2xl mb-4">🤝 SEEKING COLLABORATION</h3>
+                        <p class="font-courier text-lg mb-6">
+                            Experienced developer available for freelance projects, technical consulting, and innovative
+                            collaborations.
+                            Specializing in full-stack development, AI integration, and modern web technologies.
+                            Let's build something amazing together!
+                        </p>
+
+                        <div class="contact-links">
+                            <a href="mailto:somen.office546@gmail.com" class="contact-item">
+                                <i class="ri-mail-line text-xl"></i>
+                                <span>somen.office546@gmail.com</span>
+                            </a>
+                            <a href="https://github.com/somensh" class="contact-item" target="_blank">
+                                <i class="ri-github-line text-xl"></i>
+                                <span>github.com/somensh</span>
+                            </a>
+                            <a href="tel:+91-XXXXXXXXXX" class="contact-item">
+                                <i class="ri-phone-line text-xl"></i>
+                                <span>+91-XXXXXXXXXX</span>
+                            </a>
+                            <a href="#" class="contact-item">
+                                <i class="ri-linkedin-line text-xl"></i>
+                                <span>LinkedIn Profile</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Message Form -->
+                    <div class="message-form fade-in">
+                        <h3
+                            class="font-playfair font-bold text-2xl mb-4 text-center border-b-2 border-gray-800 dark:border-gray-200 pb-2">
+                            📮 SEND MESSAGE
+                        </h3>
+                        <p class="font-courier text-sm text-center mb-6 italic">
+                            "Express delivery of digital correspondence"
+                        </p>
+
+                        <form id="contact-form" class="space-y-4">
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="ri-user-line mr-2"></i>Full Name
+                                </label>
+                                <input type="text" name="name" class="form-input" placeholder="Your name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="ri-mail-line mr-2"></i>Telegraph Address (Email)
+                                </label>
+                                <input type="email" name="email" class="form-input" placeholder="your.email@example.com"
+                                    required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="ri-message-2-line mr-2"></i>Message Content
+                                </label>
+                                <textarea name="message" rows="5" class="form-input resize-none"
+                                    placeholder="Tell me about your project..." required></textarea>
+                            </div>
+
+                            <button type="submit" class="send-button">
+                                <i class="ri-send-plane-line mr-2"></i>
+                                DISPATCH MESSAGE
+                            </button>
+                        </form>
+
+                        <div id="form-status" class="hidden mt-4 p-3 text-center font-courier text-sm"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t-4 border-gray-800 dark:border-gray-200 bg-white dark:bg-gray-800 py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="font-courier text-sm mb-2">
+                © 2025 The Daily Portfolio - Personal Edition. All rights reserved.
+            </p>
+            <p class="font-courier text-xs text-gray-600 dark:text-gray-400">
+                "Coding the future, one commit at a time." - Designed & Developed by Somen Sharma
+            </p>
+        </div>
+    </footer>
+
+    <!-- Chatbot -->
+    <div id="chatbot" class="fixed bottom-6 right-6 z-50">
+        <button id="chatbot-toggle" class="chatbot-button">
+            <i class="ri-message-3-line text-xl"></i>
+        </button>
+        <div id="chatbot-window" class="chatbot-window hidden">
+            <div class="p-4 border-b border-gray-200 dark:border-gray-600">
+                <h3 class="font-playfair font-bold">Chat with Somen</h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400 font-courier">Ask me anything!</p>
+            </div>
+            <div class="h-64 overflow-y-auto p-4 space-y-2">
+                <div class="bg-gray-200 dark:bg-gray-700 p-2 rounded mr-8">
+                    <p class="font-courier text-sm">Hi! Thanks for visiting my portfolio. How can I help you today?</p>
+                </div>
+            </div>
+            <div class="p-4 border-t border-gray-200 dark:border-gray-600 flex gap-2">
+                <input type="text" placeholder="Type your message..."
+                    class="flex-1 p-2 border border-gray-300 dark:border-gray-600 rounded text-sm font-courier bg-white dark:bg-gray-700">
+                <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
+                    <i class="ri-send-plane-line"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
